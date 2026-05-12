@@ -8,13 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // VIEW ALL POSTS
+    /* =========================
+        VIEW ALL POSTS
+    ========================= */
     public function index()
     {
-        return response()->json(Post::with('user')->latest()->get());
+        $posts = Post::with('user')
+            ->latest()
+            ->get();
+
+        return view('posts.index', compact('posts'));
     }
 
-    // SHOW SINGLE POST
+    /* =========================
+        SHOW SINGLE POST
+    ========================= */
     public function show(Post $post)
     {
         if ($post->user_id !== Auth::id()) {
@@ -26,60 +34,82 @@ class PostController extends Controller
         return view('posts.show', compact('post'));
     }
 
-    // ADD POST
+    /* =========================
+        CREATE POST (STORE)
+    ========================= */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required|max:10000',
-            'image' => 'nullable|string',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:10000',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        // handle image upload
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')
+                ->store('posts', 'public');
+        }
 
         $validated['user_id'] = Auth::id();
 
-        $post = Post::create($validated);
+        Post::create($validated);
 
-        return response()->json([
-            'message' => 'Post created successfully',
-            'post' => $post
-        ]);
+        return redirect()->route('posts.index')
+            ->with('success', 'Post created successfully');
     }
 
-    // UPDATE POST
+    /* =========================
+        EDIT PAGE
+    ========================= */
+    public function edit(Post $post)
+    {
+        if ($post->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        return view('posts.create', compact('post'));
+    }
+
+    /* =========================
+        UPDATE POST
+    ========================= */
     public function update(Request $request, Post $post)
     {
         if ($post->user_id !== Auth::id()) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 403);
+            abort(403);
         }
 
         $validated = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required|max:10000',
-            'image' => 'nullable|string',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:10000',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        // handle image update
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')
+                ->store('posts', 'public');
+        }
 
         $post->update($validated);
 
-        return response()->json([
-            'message' => 'Post updated successfully'
-        ]);
+        return redirect()->route('posts.index')
+            ->with('success', 'Post updated successfully');
     }
 
-    // DELETE POST
+    /* =========================
+        DELETE POST
+    ========================= */
     public function destroy(Post $post)
     {
         if ($post->user_id !== Auth::id()) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 403);
+            abort(403);
         }
 
         $post->delete();
 
-        return response()->json([
-            'message' => 'Post deleted successfully'
-        ]);
+        return redirect()->route('posts.index')
+            ->with('success', 'Post deleted successfully');
     }
 }
