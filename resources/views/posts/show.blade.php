@@ -1,4 +1,6 @@
+@extends('layouts.app')
 
+@section('content')
 {{-- REMOVED "hidden" --}}
 <main id="single_post" class="bg-[#0d0f14] min-h-screen text-[#e2e2e9] font-[Inter,sans-serif]">
      <div class="max-w-[1536px] mx-auto pt-32 pb-24 px-6 lg:px-12">
@@ -47,3 +49,5 @@
         </div>
     </div>
 </main>
+
+@endsection
