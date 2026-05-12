@@ -3,21 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+    #use HasFactory;
+
+    
 
 class Post extends Model
 {
-    use HasFactory;
+    // These match your table columns exactly
+    // app/Models/Post.php
 
-    protected $fillable = [
-        'user_id',
-        'title',
-        'description',
-        'image',
-    ];
+        protected $fillable = ['title', 'image', 'description', 'user_id'];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+        public function user()
+        {
+            // Make sure you have "use App\Models\User;" at the top
+            return $this->belongsTo(User::class);
+        }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -11,6 +12,18 @@ class PostController extends Controller
     public function index()
     {
         return response()->json(Post::with('user')->latest()->get());
+    }
+
+    // SHOW SINGLE POST
+    public function show(Post $post)
+    {
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $post->load('user');
+
+        return view('posts.show', compact('post'));
     }
 
     // ADD POST
@@ -22,7 +35,7 @@ class PostController extends Controller
             'image' => 'nullable|string',
         ]);
 
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = Auth::id();
 
         $post = Post::create($validated);
 
@@ -35,7 +48,7 @@ class PostController extends Controller
     // UPDATE POST
     public function update(Request $request, Post $post)
     {
-        if ($post->user_id !== auth()->id()) {
+        if ($post->user_id !== Auth::id()) {
             return response()->json([
                 'message' => 'Unauthorized'
             ], 403);
@@ -57,7 +70,7 @@ class PostController extends Controller
     // DELETE POST
     public function destroy(Post $post)
     {
-        if ($post->user_id !== auth()->id()) {
+        if ($post->user_id !== Auth::id()) {
             return response()->json([
                 'message' => 'Unauthorized'
             ], 403);

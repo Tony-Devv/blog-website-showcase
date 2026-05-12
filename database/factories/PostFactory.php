@@ -10,10 +10,13 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
             'title' => fake()->sentence(),
-            'description' => fake()->paragraph(),
-            'image' => fake()->imageUrl(),
+            // Uses a fake image URL or path
+            'image' => fake()->imageUrl(1280, 720, 'business'), 
+            'description' => fake()->paragraphs(3, true),
+            // Automatically creates a new User or picks an existing one
+            'user_id' => User::factory(), 
+
         ];
     }
 }

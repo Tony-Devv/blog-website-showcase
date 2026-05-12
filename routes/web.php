@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
@@ -24,3 +24,5 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 Route::get('/test', function () {
     return view('test');
 });
+
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
