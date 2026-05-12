@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,3 +27,7 @@ Route::get('/test', function () {
 });
 
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+
+Route::get('/news', [NewsController::class, 'index']);
+Route::post('/news/fetch', [NewsController::class, 'fetchNews']);
