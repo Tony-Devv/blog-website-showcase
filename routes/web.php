@@ -4,25 +4,35 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
     return view('welcome');
 });
 
+/* AUTH */
 Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::post('/register', [UserController::class, 'store'])->name('register.store');
+
 Route::get('/login', [UserController::class, 'loginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.check');
 
+/* POSTS */
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
+Route::get('/posts/create', function () {
+    return view('posts.create');
+})->name('posts.create');
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::post('/posts', [PostController::class, 'store']);
-Route::put('/posts/{post}', [PostController::class, 'update']);
-Route::delete('/posts/{post}', [PostController::class, 'destroy']);
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+/* TEST */
 Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
