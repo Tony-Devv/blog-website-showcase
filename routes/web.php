@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserPostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,6 +34,8 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 
+
+Route::get('/user/posts', [UserPostController::class, 'index'])->name('users.posts');
 /* TEST */
 Route::get('/test', function () {
     return view('test');
