@@ -41,28 +41,41 @@
 
             <div class="w-full max-w-[860px] py-12 flex flex-col gap-8">
 
-                <!-- IMAGE -->
-                <input type="file"
-                       id="cover-upload"
-                       name="image"
-                       accept="image/*"
-                       class="hidden" />
+                <!-- IMAGE INPUT -->
+                <input
+                    type="file"
+                    id="cover-upload"
+                    name="image"
+                    accept="image/*"
+                    class="hidden" />
 
+                <!-- IMAGE LABEL -->
                 <label for="cover-upload"
-                    class="w-full h-[320px] border-2 border-dashed border-gray-700 rounded-xl flex flex-col items-center justify-center gap-4 cursor-pointer">
+                    class="w-full h-[320px] border-2 border-dashed border-gray-700 rounded-xl flex flex-col items-center justify-center gap-4 cursor-pointer overflow-hidden relative">
 
-                    <span class="material-symbols-outlined text-5xl text-slate-400">
-                        add_photo_alternate
-                    </span>
+                    <!-- DEFAULT CONTENT -->
+                    <div id="upload-placeholder"
+                        class="flex flex-col items-center justify-center gap-4">
 
-                    <p class="text-slate-300">
-                        {{ isset($post) ? 'Change Cover Image' : 'Add Cover Image' }}
-                    </p>
+                        <span class="material-symbols-outlined text-5xl text-slate-400">
+                            add_photo_alternate
+                        </span>
 
-                    @if(isset($post) && $post->image)
-                        <img src="{{ asset('storage/' . $post->image) }}"
-                             class="mt-4 w-full h-48 object-cover rounded-lg">
-                    @endif
+                        <p class="text-slate-300">
+                            {{ isset($post) ? 'Change Cover Image' : 'Add Cover Image' }}
+                        </p>
+
+                    </div>
+
+                    <!-- IMAGE PREVIEW -->
+                    <img
+                        id="image-preview"
+                        src="{{ isset($post) && $post->image
+                                ? asset('storage/' . $post->image) . '?v=' . time()
+                                : '' }}"
+                        class="absolute inset-0 w-full h-full object-cover
+                            {{ isset($post) && $post->image ? '' : 'hidden' }}"
+                    >
 
                 </label>
 
@@ -103,5 +116,28 @@
     </form>
 
 </main>
+
+<!-- IMAGE PREVIEW SCRIPT -->
+<script>
+    const input = document.getElementById('cover-upload');
+    const preview = document.getElementById('image-preview');
+    const placeholder = document.getElementById('upload-placeholder');
+
+    input.addEventListener('change', function (e) {
+
+        const file = e.target.files[0];
+
+        if (file) {
+
+            const imageURL = URL.createObjectURL(file);
+
+            preview.src = imageURL;
+
+            preview.classList.remove('hidden');
+
+            placeholder.classList.add('hidden');
+        }
+    });
+</script>
 
 @endsection
