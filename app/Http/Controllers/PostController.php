@@ -25,9 +25,6 @@ class PostController extends Controller
     ========================= */
     public function show(Post $post)
     {
-        if ($post->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
 
         $post->load('user');
 
