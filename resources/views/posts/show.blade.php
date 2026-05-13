@@ -8,7 +8,7 @@
 
             <article class="w-full lg:flex-1">
                 <nav class="flex items-center gap-2 mb-6 text-sm text-slate-400">
-                    <a href="/" class="hover:text-white">Home</a>
+                    <a href="/posts" class="hover:text-white">Home</a>
                     <i class="fa-solid fa-chevron-right text-[10px]"></i>
                     <span class="text-indigo-400 font-semibold">Post</span>
                 </nav>
