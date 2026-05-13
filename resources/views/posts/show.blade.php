@@ -28,7 +28,7 @@
 
                 <div class="aspect-video rounded-2xl overflow-hidden mb-12 border border-white/5">
                     {{-- If you have an image column in your DB --}}
-                    <img src="{{ $post->image  ?? 'https://via.placeholder.com/1200x800' }}" class="w-full h-full object-cover">
+                    <img src="{{ asset('storage/' . ($post->image ?? 'https://via.placeholder.com/1200x800')) }}" class="w-full h-full object-cover">
                 </div>
 
                 <div class="text-lg leading-relaxed text-slate-300 space-y-6">
