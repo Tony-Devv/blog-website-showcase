@@ -55,13 +55,23 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/posts.index')->with('success', 'Logged in successfully');
+            return redirect()->route('posts.index')->with('success', 'Logged in successfully');
         }
 
         // failed login
         return back()->withErrors([
             'email' => 'Invalid email or password',
         ]);
+    }
+
+    // handle logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
 

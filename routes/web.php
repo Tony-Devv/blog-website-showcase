@@ -4,9 +4,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserPostController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('posts.index');
+    }
     return view('welcome');
 });
 
@@ -16,6 +20,8 @@ Route::post('/register', [UserController::class, 'store'])->name('register.store
 
 Route::get('/login', [UserController::class, 'loginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.check');
+
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 /* POSTS */
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
