@@ -6,14 +6,16 @@
                 <a href="/" class="text-2xl font-bold text-white">InkWell</a>
                 
                 <div class="flex items-center gap-6">
+
+                    <a href="/news" class="text-slate-300 hover:text-white">News</a>
                     <a href="/posts" class="text-slate-300 hover:text-white">Home</a>
                     <a href="/user/posts" class="text-slate-300 hover:text-white">My Profile</a>
                     <a href="/posts/create" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm">Create Post</a>
                     
-                    {{-- <form action="{{ route('logout') }}" method="POST" class="inline">
+                 <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="text-slate-300 hover:text-white">Logout</button>
-                    </form> --}}
+                    </form> 
                 </div>
             </div>
         </div>

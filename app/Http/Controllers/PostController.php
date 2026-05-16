@@ -13,12 +13,13 @@ class PostController extends Controller
     ========================= */
     public function index()
     {
-        $posts = Post::with('user')
-            ->when(Auth::check(), function ($query) {
-                return $query->where('user_id', '!=', Auth::id());
-            })
-            ->latest()
-            ->get();
+        $query = Post::with('user')->latest();
+
+        if (Auth::check()) {
+            $query->where('user_id', '!=', Auth::id());
+        }
+
+        $posts = $query->get();
 
         return view('posts.index', compact('posts'));
     }

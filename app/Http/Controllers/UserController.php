@@ -21,14 +21,18 @@ class UserController extends Controller
         // Validation
         $request->validate([
             'name' => 'required|min:3|max:30',
+            'username' => 'required|min:3|max:30|unique:users,username',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|max:100',
+            'phone' => 'nullable|regex:/^[0-9]{6,15}$/',
+            'password' => 'required|min:8',
         ]);
 
         // Insert User
         User::create([
             'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 

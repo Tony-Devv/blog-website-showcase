@@ -2,18 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-    #use HasFactory;
-
-    
 
 class Post extends Model
 {
-    // These match your table columns exactly
-    // app/Models/Post.php
+    use HasFactory;
 
-        protected $fillable = ['title', 'image', 'description', 'user_id'];
+    protected $fillable = ['title', 'image', 'description', 'user_id'];
 
         public function user()
         {
