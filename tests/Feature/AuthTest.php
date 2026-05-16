@@ -26,8 +26,10 @@ class AuthTest extends TestCase
     {
         $userData = [
             'name' => 'John Doe',
+            
             'email' => 'john@example.com',
-            'password' => 'password123'
+            'username' => 'johndoe',
+            'password' => 'Ahmed@1234'
         ];
 
         $response = $this->post(route('register.store'), $userData);
@@ -44,14 +46,14 @@ class AuthTest extends TestCase
         
       
         $user = User::where('email', 'john@example.com')->first();
-        $this->assertTrue(Hash::check('password123', $user->password));
+        $this->assertTrue(Hash::check('Ahmed@1234', $user->password));
     }
 
     public function test_requires_name_email_and_password_for_registration()
     {
         $response = $this->post(route('register.store'), []);
         
-        $response->assertSessionHasErrors(['name', 'email', 'password']);
+        $response->assertSessionHasErrors(['name', 'email', 'password', 'username']);
         
         
         $this->assertEquals(0, User::count());
@@ -71,14 +73,15 @@ class AuthTest extends TestCase
     {
         
         $user = User::factory()->create([
+            'username' => 'johndoe',
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'password' => Hash::make('password123'),
         ]);
         
         $response = $this->post(route('login.check'), [
-            'email' => 'john@example.com',
-            'password' => 'password123',
+             'email' => 'john@example.com',
+            'password' => 'password123'
         ]);
         
      

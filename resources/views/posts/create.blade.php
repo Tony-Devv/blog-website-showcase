@@ -131,7 +131,7 @@
     const preview = document.getElementById('image-preview');
     const placeholder = document.getElementById('upload-placeholder');
 
-    // Error container
+    
     const errBox = document.createElement('div');
     errBox.id = 'client-errors';
     errBox.className = 'hidden bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-sm mb-6';
@@ -148,7 +148,7 @@
         return /<[^>]*>/g.test(str);
     }
 
-    // Image validation on file select
+   
     image.addEventListener('change', function() {
         const file = this.files[0];
         if (!file) return;
@@ -167,7 +167,7 @@
         }
     });
 
-    // Image preview
+
     image.addEventListener('change', function() {
         const file = this.files[0];
         if (file) {
@@ -177,7 +177,7 @@
         }
     });
 
-    // Form submit validation
+    
     form.addEventListener('submit', function(e) {
         errBox.classList.add('hidden');
 

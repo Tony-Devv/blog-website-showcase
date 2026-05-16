@@ -13,7 +13,7 @@
                     <span class="text-indigo-400 font-semibold">Post</span>
                 </nav>
 
-                {{-- Use {{ }} to show dynamic data --}}
+                
                 <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-4">
                     {{ $post->title }}
                 </h1>
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="aspect-video rounded-2xl overflow-hidden mb-12 border border-white/5">
-                    {{-- If you have an image column in your DB --}}
+                    
                     <img src="{{ asset('storage/' . ($post->image ?? 'https://via.placeholder.com/1200x800')) }}" class="w-full h-full object-cover">
                 </div>
 
@@ -41,7 +41,7 @@
                     <h4 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-6">In this article</h4>
                     <ul class="space-y-4 text-sm">
                         <li class="text-indigo-400 font-bold">{{ $post->title }}</li>
-                        {{-- You can add more dynamic links here later --}}
+                     
                     </ul>
                 </div>
             </aside>

@@ -14,9 +14,10 @@ class RegisterTest extends TestCase
     {
         $response = $this->post('/register', [
             'name' => 'Ahmed',
+            'username' => 'ahmed',
             'email' => 'ahmed@test.com',
-            'password' => '12345678',
-            'password_confirmation' => '12345678',
+            'password' => 'Ahmed@1234',
+            'password_confirmation' => 'Ahmed@1234',
             'terms' => true,
         ]);
 
@@ -33,7 +34,8 @@ class RegisterTest extends TestCase
         $response = $this->post('/register', [
             'name' => '',
             'email' => 'ahmed@test.com',
-            'password' => '12345678',
+            'username' => 'ahmed',
+            'password' => 'Ahmed@1234',
         ]);
 
         $response->assertSessionHasErrors('name');
@@ -42,6 +44,7 @@ class RegisterTest extends TestCase
     public function test_register_requires_email()
     {
         $response = $this->post('/register', [
+            'username' => 'ahmed',
             'name' => 'Ahmed',
             'email' => '',
             'password' => '12345678',
@@ -60,4 +63,17 @@ class RegisterTest extends TestCase
 
         $response->assertSessionHasErrors('password');
     }
+
+    public function test_register_requires_username()
+    {
+        $response = $this->post('/register', [
+            'name' => 'Ahmed',
+            'email' => 'ahmed@test.com',
+            'username' => '',
+            'password' => '12345678',
+        ]);
+
+        $response->assertSessionHasErrors('username');
+    }
 }
+      

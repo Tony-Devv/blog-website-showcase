@@ -13,7 +13,7 @@ class Post extends Model
 
         public function user()
         {
-            // Make sure you have "use App\Models\User;" at the top
+           
             return $this->belongsTo(User::class);
         }
 }

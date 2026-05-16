@@ -97,10 +97,7 @@
                         @endforeach
                     </div>
                     
-                    <!-- Pagination -->
-                    {{-- <div class="mt-12">
-                        {{ $posts->links() }}
-                    </div> --}}
+                  
                 @endif
             </div>
             
