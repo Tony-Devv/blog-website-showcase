@@ -41,6 +41,22 @@ This project was built as a team effort. A realistic split of work for this code
 - User posts page
 - News explorer page
 
+## Showcase
+
+![Login page](public/showcase/login-page.png)
+
+![Register page](public/showcase/register-page.png)
+
+![Posts feed](public/showcase/posts-feed-empty.png)
+
+![Create post page](public/showcase/create-post-page.png)
+
+![My profile page](public/showcase/my-profile-page.png)
+
+![Single post page](public/showcase/single-post-page.png)
+
+![News page](public/showcase/news-page.png)
+
 ## Requirements to run the project
 
 You need the following installed locally:
