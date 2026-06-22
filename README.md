@@ -94,33 +94,14 @@ Set these values in the environment file before running the project:
 - DB_USERNAME and DB_PASSWORD if you use MySQL
 - NEWS_API_KEY=your_api_key_here
 
-## Demo account for screenshots
+## Demo account for local testing
 
 The database seeder creates a sample user:
 
 - Email: test@example.com
 - Password: password
 
-Use that account after running the seed step if you want a quick login for screenshots.
-
-## Screenshot prep
-
-To capture realistic screenshots, make sure you have:
-
-- At least one registered account
-- A logged-in session
-- At least one or two sample posts with cover images
-- A working NewsAPI key
-- The storage symlink created so uploaded images display correctly
-
-Recommended screenshot sequence:
-
-1. Login page
-2. Register page
-3. Posts feed after login
-4. Create post page
-5. Single post page
-6. News explorer page with results loaded
+Use that account after running the seed step if you want a quick login for local testing.
 
 ## Notes on the codebase
 
