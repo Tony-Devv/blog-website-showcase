@@ -1,57 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Blog Website Showcase
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A collaborative Laravel blog platform for user authentication, post publishing, and live news discovery.
 
-## About Laravel
+## What the project does
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Lets users register, log in, and log out securely.
+- Supports creating, editing, viewing, and deleting blog posts.
+- Stores post cover images and displays them in the feed and post pages.
+- Includes a news explorer with search, language, date, and sorting filters.
+- Shows posts owned by the signed-in user in a dedicated profile view.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Team contribution split
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project was built as a team effort. A realistic split of work for this codebase is:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Authentication, validation, password hashing, and session handling.
+- Access control and security checks for editing and deleting posts.
+- Create Post page and image upload flow.
+- Database design and SQL queries.
+- News search and filter integration.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tech stack
 
-## Laravel Sponsors
+- Laravel 12
+- PHP 8.2+
+- Blade templates
+- MySQL or SQLite
+- Vite
+- Tailwind CSS
+- NewsAPI
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Main pages
 
-### Premium Partners
+- Login page
+- Register page
+- Posts feed
+- Create post page
+- Edit post page
+- Single post page
+- User posts page
+- News explorer page
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Requirements to run the project
 
-## Contributing
+You need the following installed locally:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP 8.2 or newer
+- Composer
+- Node.js and npm
+- Git
+- A database engine
 
-## Code of Conduct
+The project ships with SQLite as the default local database in the environment file, so the easiest setup is SQLite. If you prefer MySQL, update the database settings in the environment file before migrating.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+You also need a valid NewsAPI key for the news page to return results.
 
-## Security Vulnerabilities
+## Local setup
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Install PHP dependencies with Composer.
+2. Copy the environment file and configure it.
+3. Generate the application key.
+4. Create the database and run migrations.
+5. Install frontend dependencies.
+6. Link the storage folder for uploaded post images.
+7. Start the backend and frontend build process.
+
+### Commands
+
+```bash
+composer install
+copy .env.example .env
+php artisan key:generate
+php artisan migrate
+npm install
+php artisan storage:link
+php artisan serve
+npm run dev
+```
+
+If you are using SQLite, make sure the database file exists before running migrations:
+
+```bash
+type nul > database\database.sqlite
+```
+
+## Environment variables
+
+Set these values in the environment file before running the project:
+
+- APP_URL=http://localhost
+- DB_CONNECTION=sqlite or mysql
+- DB_DATABASE=database/database.sqlite for SQLite, or your MySQL database name
+- DB_USERNAME and DB_PASSWORD if you use MySQL
+- NEWS_API_KEY=your_api_key_here
+
+## Demo account for screenshots
+
+The database seeder creates a sample user:
+
+- Email: test@example.com
+- Password: password
+
+Use that account after running the seed step if you want a quick login for screenshots.
+
+## Screenshot prep
+
+To capture realistic screenshots, make sure you have:
+
+- At least one registered account
+- A logged-in session
+- At least one or two sample posts with cover images
+- A working NewsAPI key
+- The storage symlink created so uploaded images display correctly
+
+Recommended screenshot sequence:
+
+1. Login page
+2. Register page
+3. Posts feed after login
+4. Create post page
+5. Single post page
+6. News explorer page with results loaded
+
+## Notes on the codebase
+
+- Registration validates name, email, and password.
+- Login validates credentials and regenerates the session on success.
+- Post update and delete actions are restricted to the post owner.
+- Uploaded images are stored on the public disk and shown through the storage link.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
