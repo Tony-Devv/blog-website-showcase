@@ -43,19 +43,15 @@ This project was built as a team effort. A realistic split of work for this code
 
 ## Showcase
 
-![Login page](public/showcase/login-page.png)
+![Login page](public/showcase/Login.png)
 
-![Register page](public/showcase/register-page.png)
+![Register page](public/showcase/Register.png)
 
-![Posts feed](public/showcase/posts-feed-empty.png)
+![Posts feed](public/showcase/PostFeed.png)
 
-![Create post page](public/showcase/create-post-page.png)
+![Create post page](public/showcase/CreatePost.png)
 
-![My profile page](public/showcase/my-profile-page.png)
-
-![Single post page](public/showcase/single-post-page.png)
-
-![News page](public/showcase/news-page.png)
+![User posts page](public/showcase/UserPosts.png)
 
 ## Requirements to run the project
 
